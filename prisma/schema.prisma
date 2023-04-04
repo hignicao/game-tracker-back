@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,4 +5,70 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model gameGenre {
+  id      Int    @id @default(autoincrement())
+  gameId  Int
+  genreId Int
+  games   games  @relation(fields: [gameId], references: [id])
+  genres  genres @relation(fields: [genreId], references: [id])
+}
+
+model gamePlataform {
+  id          Int        @id @default(autoincrement())
+  gameId      Int
+  plataformId Int
+  games       games      @relation(fields: [gameId], references: [id])
+  plataforms  plataforms @relation(fields: [plataformId], references: [id])
+}
+
+model gameStatus {
+  id             Int              @id @default(autoincrement())
+  name           String           @unique
+  userCollection userCollection[]
+}
+
+model games {
+  id             Int              @id @default(autoincrement())
+  rating         Int
+  cover          String
+  releaseDate    DateTime
+  name           String
+  summary        String
+  gameGenre      gameGenre[]
+  gamePlataform  gamePlataform[]
+  userCollection userCollection[]
+}
+
+model genres {
+  id        Int         @id @default(autoincrement())
+  name      String
+  gameGenre gameGenre[]
+}
+
+model plataforms {
+  id            Int             @id @default(autoincrement())
+  name          String
+  gamePlataform gamePlataform[]
+}
+
+model user {
+  id             Int              @id@default(autoincrement())
+  name           String           @db.VarChar(255)
+  username       String           @unique @db.VarChar(255)
+  email          String           @unique @db.VarChar(255)
+  password       String           @db.VarChar(255)
+  createdAt      DateTime         @default(now())
+  userCollection userCollection[]
+}
+
+model userCollection {
+  id         Int        @id @default(autoincrement())
+  userId     Int
+  gameId     Int
+  statusId   Int
+  user       user       @relation(fields: [userId], references: [id])
+  games      games      @relation(fields: [gameId], references: [id])
+  gameStatus gameStatus @relation(fields: [statusId], references: [id])
 }

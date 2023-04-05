@@ -7,68 +7,76 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model gameGenre {
+model GameGenre {
   id      Int    @id @default(autoincrement())
   gameId  Int
   genreId Int
-  games   games  @relation(fields: [gameId], references: [id])
-  genres  genres @relation(fields: [genreId], references: [id])
+  Games   Games  @relation(fields: [gameId], references: [id])
+  Genres  Genres @relation(fields: [genreId], references: [id])
 }
 
-model gamePlataform {
+model GamePlataform {
   id          Int        @id @default(autoincrement())
   gameId      Int
   plataformId Int
-  games       games      @relation(fields: [gameId], references: [id])
-  plataforms  plataforms @relation(fields: [plataformId], references: [id])
+  Games       Games      @relation(fields: [gameId], references: [id])
+  Plataforms  Plataforms @relation(fields: [plataformId], references: [id])
 }
 
-model gameStatus {
+model Screenshots {
+  id         Int    @id @default(autoincrement())
+  gameId     Int
+  screenshot String
+  Games      Games  @relation(fields: [gameId], references: [id])
+}
+
+model GameStatus {
   id             Int              @id @default(autoincrement())
   name           String           @unique
-  userCollection userCollection[]
+  UserCollection UserCollection[]
 }
 
-model games {
+model Games {
   id             Int              @id @default(autoincrement())
   rating         Int
   cover          String
   releaseDate    DateTime
   name           String
   summary        String
-  gameGenre      gameGenre[]
-  gamePlataform  gamePlataform[]
-  userCollection userCollection[]
+  GameGenre      GameGenre[]
+  GamePlataform  GamePlataform[]
+  UserCollection UserCollection[]
+  Screenshots    Screenshots[]
 }
 
-model genres {
+model Genres {
   id        Int         @id @default(autoincrement())
   name      String
-  gameGenre gameGenre[]
+  GameGenre GameGenre[]
 }
 
-model plataforms {
+model Plataforms {
   id            Int             @id @default(autoincrement())
   name          String
-  gamePlataform gamePlataform[]
+  GamePlataform GamePlataform[]
 }
 
-model user {
-  id             Int              @id@default(autoincrement())
+model User {
+  id             Int              @id @default(autoincrement())
   name           String           @db.VarChar(255)
   username       String           @unique @db.VarChar(255)
   email          String           @unique @db.VarChar(255)
   password       String           @db.VarChar(255)
   createdAt      DateTime         @default(now())
-  userCollection userCollection[]
+  UserCollection UserCollection[]
 }
 
-model userCollection {
+model UserCollection {
   id         Int        @id @default(autoincrement())
   userId     Int
   gameId     Int
   statusId   Int
-  user       user       @relation(fields: [userId], references: [id])
-  games      games      @relation(fields: [gameId], references: [id])
-  gameStatus gameStatus @relation(fields: [statusId], references: [id])
+  User       User       @relation(fields: [userId], references: [id])
+  Games      Games      @relation(fields: [gameId], references: [id])
+  GameStatus GameStatus @relation(fields: [statusId], references: [id])
 }

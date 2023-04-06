@@ -1,11 +1,13 @@
 import bcrypt from "bcrypt";
-import userRepository from "repositories/users-repository";
+import userRepository from "@/repositories/users-repository";
 import { User } from "@prisma/client";
 
 async function createUser({ name, username, email, password }: CreateUserParams): Promise<User> {
+
 	await validadeUniqueEmail(email);
 	await validadeUniqueUsername(username);
 
+	console.log("oii")
 	const hashedPassword = await bcrypt.hash(password, 12);
 
 	return userRepository.create({

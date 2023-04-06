@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { User } from "@prisma/client";
-import userRepository from "repositories/users-repository";
+import userRepository from "@/repositories/users-repository";
 
 async function signIn(params: SignInParams): Promise<SignInResult> {
 	const { username, password } = params;
@@ -10,7 +10,7 @@ async function signIn(params: SignInParams): Promise<SignInResult> {
 
 	await validadePassword(password, user.password);
 
-	const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+	const token = jwt.sign({ userId: user.id }, process.env.SECRET_JWT, {
 		expiresIn: 86400,
 	});
 

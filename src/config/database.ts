@@ -13,3 +13,8 @@ export async function disconnectDB(): Promise<void> {
   await prisma?.$disconnect();
   await redisClient.quit();
 }
+
+// import { PrismaClient } from '@prisma/client'
+// const prisma = new PrismaClient()
+
+// export default prisma

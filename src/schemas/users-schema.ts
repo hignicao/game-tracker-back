@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { CreateUserParams } from "services";
+import { CreateUserParams } from "@/services";
 
 export const createUserSchema = Joi.object<CreateUserParams>({
 	name: Joi.string().required(),

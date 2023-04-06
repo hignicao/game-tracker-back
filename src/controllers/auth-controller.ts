@@ -1,12 +1,13 @@
 import { Request, Response } from "express";
 import httpStatus from "http-status";
-import authService, { SignInParams } from "services/auth-service";
+import authService, { SignInParams } from "@/services/auth-service";
 
 export async function signInPost(req: Request, res: Response) {
 	const user = req.body as SignInParams;
 
 	try {
 		const loggedUser = await authService.signIn(user);
+		console.log("🚀 ~ file: auth-controller.ts:10 ~ signInPost ~ loggedUser:", loggedUser)
 		return res.status(httpStatus.OK).send(loggedUser);
 	} catch (error) {
 		if (error.message === "User not found") {

@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
 }
 
 datasource db {
@@ -15,12 +15,12 @@ model GameGenre {
   Genres  Genres @relation(fields: [genreId], references: [id])
 }
 
-model GamePlataform {
-  id          Int        @id @default(autoincrement())
+model GamePlatform {
+  id          Int       @id @default(autoincrement())
   gameId      Int
   plataformId Int
-  Games       Games      @relation(fields: [gameId], references: [id])
-  Plataforms  Plataforms @relation(fields: [plataformId], references: [id])
+  Games       Games     @relation(fields: [gameId], references: [id])
+  Plataforms  Platforms @relation(fields: [plataformId], references: [id])
 }
 
 model Screenshots {
@@ -44,7 +44,7 @@ model Games {
   name           String
   summary        String
   GameGenre      GameGenre[]
-  GamePlataform  GamePlataform[]
+  GamePlataform  GamePlatform[]
   UserCollection UserCollection[]
   Screenshots    Screenshots[]
 }
@@ -55,13 +55,13 @@ model Genres {
   GameGenre GameGenre[]
 }
 
-model Plataforms {
-  id            Int             @id @default(autoincrement())
+model Platforms {
+  id            Int            @id @default(autoincrement())
   name          String
-  GamePlataform GamePlataform[]
+  GamePlataform GamePlatform[]
 }
 
-model User {
+model Users {
   id             Int              @id @default(autoincrement())
   name           String           @db.VarChar(255)
   username       String           @unique @db.VarChar(255)
@@ -76,7 +76,7 @@ model UserCollection {
   userId     Int
   gameId     Int
   statusId   Int
-  User       User       @relation(fields: [userId], references: [id])
+  Users      Users      @relation(fields: [userId], references: [id])
   Games      Games      @relation(fields: [gameId], references: [id])
   GameStatus GameStatus @relation(fields: [statusId], references: [id])
 }

@@ -2,11 +2,11 @@ import { prisma } from "config";
 import { CreateUserParams } from "@/services";
 
 async function create(data: CreateUserParams) {
-	return prisma.user.create({ data });
+	return prisma.users.create({ data });
 }
 
 async function findByEmail(email: string) {
-	return prisma.user.findUnique({
+	return prisma.users.findUnique({
 		where: {
 			email,
 		},
@@ -14,7 +14,7 @@ async function findByEmail(email: string) {
 }
 
 async function findByUsername(username: string) {
-	return prisma.user.findUnique({
+	return prisma.users.findUnique({
 		where: {
 			username,
 		},
@@ -22,7 +22,7 @@ async function findByUsername(username: string) {
 }
 
 async function findById(id: number) {
-	return prisma.user.findUnique({
+	return prisma.users.findUnique({
 		where: {
 			id,
 		},

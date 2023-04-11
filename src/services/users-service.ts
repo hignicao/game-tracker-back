@@ -1,13 +1,12 @@
 import bcrypt from "bcrypt";
 import userRepository from "@/repositories/users-repository";
-import { User } from "@prisma/client";
+import { Users } from "@prisma/client";
+import collectionRepository from "@/repositories/collection-repository";
 
-async function createUser({ name, username, email, password }: CreateUserParams): Promise<User> {
-
+async function createUser({ name, username, email, password }: CreateUserParams): Promise<Users> {
 	await validadeUniqueEmail(email);
 	await validadeUniqueUsername(username);
 
-	console.log("oii")
 	const hashedPassword = await bcrypt.hash(password, 12);
 
 	return userRepository.create({
@@ -16,6 +15,33 @@ async function createUser({ name, username, email, password }: CreateUserParams)
 		email,
 		password: hashedPassword,
 	});
+}
+
+async function getUserProfileInfo(givenUsername: string) {
+	const user = await userRepository.findByUsername(givenUsername);
+	if (!user) {
+		throw new Error("User not found");
+	}
+	const userCollection = await collectionRepository.getUserCollection(user.id);
+
+	const collection = userCollection.map((game) => {
+		return {
+			id: game.Games.id,
+			name: game.Games.name,
+			cover: game.Games.cover,
+			rating: game.Games.rating,
+			statusId: game.statusId,
+		};
+	});
+
+	const allUserInfo = {
+		id: user.id,
+		name: user.name,
+		username: user.username,
+		collection,
+	};
+
+	return allUserInfo;
 }
 
 async function validadeUniqueEmail(email: string) {
@@ -32,12 +58,21 @@ async function validadeUniqueUsername(username: string) {
 	}
 }
 
-export type CreateUserParams = Pick<User, "name" | "username" | "email" | "password">;
+async function validadeIdWithUsername(givenUsername: string, userId: number) {
+	const user = await userRepository.findByUsername(givenUsername);
+	if (user?.id !== userId) {
+		throw new Error("You can only edit your own profile");
+	}
+}
+
+export type CreateUserParams = Pick<Users, "name" | "username" | "email" | "password">;
 
 const userService = {
 	createUser,
 	validadeUniqueEmail,
 	validadeUniqueUsername,
+	validadeIdWithUsername,
+	getUserProfileInfo,
 };
 
 export default userService;

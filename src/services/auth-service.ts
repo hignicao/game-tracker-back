@@ -1,17 +1,17 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { User } from "@prisma/client";
+import { Users } from "@prisma/client";
 import userRepository from "@/repositories/users-repository";
 
 async function signIn(params: SignInParams): Promise<SignInResult> {
-	const { username, password } = params;
+	const { username, password, remember } = params;
 
 	const user = await validadeUserExists(username);
 
 	await validadePassword(password, user.password);
 
 	const token = jwt.sign({ userId: user.id }, process.env.SECRET_JWT, {
-		expiresIn: 86400,
+		expiresIn: remember ? 86400 : 3600,
 	});
 
 	return {
@@ -40,10 +40,10 @@ async function validadePassword(password: string, givenpassword: string) {
 	}
 }
 
-export type SignInParams = Pick<User, "username" | "password">;
+export type SignInParams = Pick<Users, "username" | "password"> & { remember?: boolean };
 
 type SignInResult = {
-	user: Pick<User, "id" | "name" | "username" | "email">;
+	user: Pick<Users, "id" | "name" | "username" | "email">;
 	token: string;
 };
 

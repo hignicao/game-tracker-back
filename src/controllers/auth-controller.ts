@@ -7,7 +7,6 @@ export async function signInPost(req: Request, res: Response) {
 
 	try {
 		const loggedUser = await authService.signIn(user);
-		console.log("🚀 ~ file: auth-controller.ts:10 ~ signInPost ~ loggedUser:", loggedUser)
 		return res.status(httpStatus.OK).send(loggedUser);
 	} catch (error) {
 		if (error.message === "User not found") {

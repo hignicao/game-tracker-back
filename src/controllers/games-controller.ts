@@ -15,9 +15,12 @@ export async function getGameInfo(req: Request, res: Response) {
 	const gameId = req.params.id;
 
 	try {
-		const game = await gameService.getGameInfo(Number(gameId));
+		const game = await gameService.getGameById(Number(gameId));
 		res.status(httpStatus.OK).send(game);
 	} catch (error) {
+		if (error.message === "Game not found") {
+			return res.status(httpStatus.NOT_FOUND).send(error.message);
+		}
 		return res.status(httpStatus.BAD_REQUEST).send(error);
 	}
 }

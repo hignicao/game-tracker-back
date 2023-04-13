@@ -7,19 +7,19 @@ import { fromUnixTime } from "date-fns";
 async function getGameById(gameId: number) {
 	const game = await gameRepository.findById(gameId);
 	if (!game) {
-		throw new Error("Game not found");
+		return getGameFromIGDB(gameId);
 	}
-
 	return game;
 }
 
-async function insertNewGameToDB(game: Game) {
-	const gameAlreadyExists = await gameRepository.findById(game.id);
-	if (gameAlreadyExists) {
-		throw new Error("Game already exists");
+async function insertNewGameToDB(gameId: number) {
+	const game = await gameRepository.findById(gameId);
+	if (!game) {
+		const newGame = await getGameFromIGDB(gameId);
+		await gameRepository.create(newGame);
+		return newGame;
 	}
-
-	// return gameRepository.create(game);
+	return game;
 }
 
 async function getTrendingGames(): Promise<TrendingGame[]> {
@@ -45,8 +45,12 @@ async function getTrendingGames(): Promise<TrendingGame[]> {
 	}
 }
 
-async function getGameInfo(gameId: number): Promise<Game> {
+async function getGameFromIGDB(gameId: number): Promise<Game> {
 	const result = (await getGameByIGDBId(gameId)) as GameIGDB;
+	if (!result) {
+		throw new Error("Game not found");
+	}
+
 	const game = {
 		id: result.id,
 		name: result.name,
@@ -90,7 +94,6 @@ const gameService = {
 	getGameById,
 	insertNewGameToDB,
 	getTrendingGames,
-	getGameInfo,
 	searchGames,
 };
 

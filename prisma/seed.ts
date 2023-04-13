@@ -1178,91 +1178,91 @@ async function main() {
 		data: [
 			{
 				gameId: 1020,
-				plataformId: 6,
+				platformId: 6,
 			},
 			{
 				gameId: 1020,
-				plataformId: 9,
+				platformId: 9,
 			},
 			{
 				gameId: 1020,
-				plataformId: 12,
+				platformId: 12,
 			},
 			{
 				gameId: 1020,
-				plataformId: 48,
+				platformId: 48,
 			},
 			{
 				gameId: 1020,
-				plataformId: 49,
+				platformId: 49,
 			},
 			{
 				gameId: 1942,
-				plataformId: 6,
+				platformId: 6,
 			},
 			{
 				gameId: 1942,
-				plataformId: 48,
+				platformId: 48,
 			},
 			{
 				gameId: 1942,
-				plataformId: 49,
+				platformId: 49,
 			},
 			{
 				gameId: 1942,
-				plataformId: 130,
+				platformId: 130,
 			},
 			{
 				gameId: 1942,
-				plataformId: 167,
+				platformId: 167,
 			},
 			{
 				gameId: 1942,
-				plataformId: 169,
+				platformId: 169,
 			},
 			{
 				gameId: 472,
-				plataformId: 6,
+				platformId: 6,
 			},
 			{
 				gameId: 472,
-				plataformId: 9,
+				platformId: 9,
 			},
 			{
 				gameId: 472,
-				plataformId: 12,
+				platformId: 12,
 			},
 			{
 				gameId: 1877,
-				plataformId: 6,
+				platformId: 6,
 			},
 			{
 				gameId: 1877,
-				plataformId: 48,
+				platformId: 48,
 			},
 			{
 				gameId: 1877,
-				plataformId: 49,
+				platformId: 49,
 			},
 			{
 				gameId: 1877,
-				plataformId: 167,
+				platformId: 167,
 			},
 			{
 				gameId: 1877,
-				plataformId: 169,
+				platformId: 169,
 			},
 			{
 				gameId: 1877,
-				plataformId: 170,
+				platformId: 170,
 			},
 			{
 				gameId: 7346,
-				plataformId: 41,
+				platformId: 41,
 			},
 			{
 				gameId: 7346,
-				plataformId: 130,
+				platformId: 130,
 			},
 		],
 	});

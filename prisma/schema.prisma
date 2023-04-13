@@ -1,5 +1,5 @@
 generator client {
-  provider        = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -16,11 +16,11 @@ model GameGenre {
 }
 
 model GamePlatform {
-  id          Int       @id @default(autoincrement())
-  gameId      Int
-  plataformId Int
-  Games       Games     @relation(fields: [gameId], references: [id])
-  Plataforms  Platforms @relation(fields: [plataformId], references: [id])
+  id         Int       @id @default(autoincrement())
+  gameId     Int
+  platformId Int
+  Games      Games     @relation(fields: [gameId], references: [id])
+  Platforms  Platforms @relation(fields: [platformId], references: [id])
 }
 
 model Screenshots {
@@ -38,13 +38,13 @@ model GameStatus {
 
 model Games {
   id             Int              @id @default(autoincrement())
-  rating         Int
+  rating         Int?
   cover          String
-  releaseDate    DateTime
+  releaseDate    DateTime?
   name           String
-  summary        String
+  summary        String?
   GameGenre      GameGenre[]
-  GamePlataform  GamePlatform[]
+  GamePlatform   GamePlatform[]
   UserCollection UserCollection[]
   Screenshots    Screenshots[]
 }
@@ -56,9 +56,9 @@ model Genres {
 }
 
 model Platforms {
-  id            Int            @id @default(autoincrement())
-  name          String
-  GamePlataform GamePlatform[]
+  id           Int            @id @default(autoincrement())
+  name         String
+  GamePlatform GamePlatform[]
 }
 
 model Users {

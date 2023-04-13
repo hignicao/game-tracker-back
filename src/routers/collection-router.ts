@@ -6,7 +6,7 @@ import { deleteGameFromCollection, updateGameCollection } from "@/controllers";
 
 const collectionRouter = Router();
 
-collectionRouter.put("/", validateBody(updateGameCollectionSchema), autheticateToken, updateGameCollection);
+collectionRouter.put("/update-collection", validateBody(updateGameCollectionSchema), autheticateToken, updateGameCollection);
 collectionRouter.delete("/:gameId", autheticateToken, deleteGameFromCollection);
 
 export { collectionRouter };

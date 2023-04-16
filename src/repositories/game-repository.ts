@@ -81,6 +81,7 @@ async function findById(id: number) {
 		genres: gameRaw.GameGenre.map((genre) => genre.Genres),
 		platforms: gameRaw.GamePlatform.map((platform) => platform.Platforms),
 		screenshots: gameRaw.Screenshots.map((screenshot) => screenshot.screenshot),
+		statusId: 0,
 	};
 
 	return gameInfo;

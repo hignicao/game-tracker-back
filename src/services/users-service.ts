@@ -24,21 +24,11 @@ async function getUserProfileInfo(givenUsername: string) {
 	}
 	const userCollection = await collectionRepository.getUserCollection(user.id);
 
-	const collection = userCollection.map((game) => {
-		return {
-			id: game.Games.id,
-			name: game.Games.name,
-			cover: game.Games.cover,
-			rating: game.Games.rating,
-			statusId: game.statusId,
-		};
-	});
-
 	const allUserInfo = {
 		id: user.id,
 		name: user.name,
 		username: user.username,
-		collection,
+		collection: userCollection,
 	};
 
 	return allUserInfo;

@@ -78,6 +78,7 @@ async function searchGames(query: string): Promise<SearchedGame[]> {
 			return {
 				id: game.id,
 				name: game.name,
+				releaseDate: fromUnixTime(game.first_release_date) || null,
 				cover: game.cover?.image_id || null,
 				summary: game.summary || null,
 				genres: game.genres || [],

@@ -24,7 +24,7 @@ export async function getUserProfile(req: Request, res: Response) {
 
 	try {
 		const userInfo = await userService.getUserProfileInfo(givenUsername);
-		return res.status(httpStatus.OK).json(userInfo);
+		return res.status(httpStatus.OK).send(userInfo);
 	} catch (error) {
 		return res.status(httpStatus.BAD_REQUEST).send(error);
 	}

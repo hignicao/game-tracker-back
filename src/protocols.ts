@@ -19,7 +19,11 @@ export type Game = {
 
 export type TrendingGame = Pick<Game, "id" | "name" | "cover" | "rating" | "statusId">;
 
-export type SearchedGame = Pick<Game, "id" | "name" | "cover" | "summary" | "genres" | "statusId">;
+export type CollectionGame = Pick<Game, "id" | "name" | "cover" | "rating" | "statusId">;
+
+export type SimplifiedCollectionGame = Pick<Game, "id" | "statusId">;
+
+export type SearchedGame = Pick<Game, "id" | "name" | "cover" | "summary" | "genres" | "statusId" | "releaseDate">;
 
 export type GameIGDB = {
 	id: number;
@@ -47,4 +51,4 @@ export type GameIGDB = {
 
 export type TrendingGameIGDB = Pick<GameIGDB, "id" | "name" | "cover" | "aggregated_rating">;
 
-export type SearchedGameIGDB = Pick<GameIGDB, "id" | "name" | "cover" | "summary" | "genres">;
+export type SearchedGameIGDB = Pick<GameIGDB, "id" | "name" | "cover" | "summary" | "genres" | "first_release_date">;

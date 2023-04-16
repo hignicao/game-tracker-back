@@ -26,9 +26,14 @@ async function deleteGameFromCollection(userId: number, gameId: number) {
 	await collectionRepository.removeFromCollection(userId, gameId);
 }
 
+async function getSimplifiedCollection(userId: number) {
+	return await collectionRepository.getUserCollectionSimplified(userId);
+}
+
 const collectionService = {
 	updateGameCollection,
 	deleteGameFromCollection,
+	getSimplifiedCollection,
 };
 
 export default collectionService;

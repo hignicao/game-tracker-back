@@ -3,6 +3,17 @@ import collectionService from "@/services/collection-service";
 import { Response } from "express";
 import httpStatus from "http-status";
 
+export async function getSimplifiedCollection(req: AuthenticatedRequest, res: Response) {
+	const userId = req.userId;
+
+	try {
+		const collection = await collectionService.getSimplifiedCollection(userId);
+		res.status(httpStatus.OK).send(collection);
+	} catch (error) {
+		res.status(httpStatus.BAD_REQUEST).send(error);
+	}
+}
+
 export async function updateGameCollection(req: AuthenticatedRequest, res: Response) {
 	const { gameId, statusId } = req.body as { gameId: number; statusId: number };
 	const userId = req.userId;

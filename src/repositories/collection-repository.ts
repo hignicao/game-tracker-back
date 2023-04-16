@@ -1,9 +1,12 @@
 import { prisma } from "config";
 
 async function getUserCollection(userId: number) {
-	return prisma.userCollection.findMany({
+	const collectionRaw = await prisma.userCollection.findMany({
 		where: {
 			userId: userId,
+		},
+		orderBy: {
+			id: 'desc',
 		},
 		select: {
 			Games: {
@@ -17,6 +20,39 @@ async function getUserCollection(userId: number) {
 			statusId: true,
 		},
 	});
+
+	return collectionRaw.map((game) => {
+		return {
+			id: game.Games.id,
+			name: game.Games.name,
+			cover: game.Games.cover,
+			rating: game.Games.rating,
+			statusId: game.statusId,
+		};
+	});
+}
+
+async function getUserCollectionSimplified(userId: number) {
+	const collectionRaw = await prisma.userCollection.findMany({
+		where: {
+			userId: userId,
+		},
+		select: {
+			Games: {
+				select: {
+					id: true,
+				},
+			},
+			statusId: true,
+		},
+	});
+
+	return collectionRaw.map((game) => {
+		return {
+			id: game.Games.id,
+			statusId: game.statusId,
+		};
+	});
 }
 
 async function checkIfGameIsInCollection(userId: number, gameId: number) {
@@ -29,7 +65,7 @@ async function checkIfGameIsInCollection(userId: number, gameId: number) {
 }
 
 async function upsertNewCollection(userId: number, gameId: number, statusId: number, collectionId: number) {
-	await prisma.userCollection.upsert({
+	return await prisma.userCollection.upsert({
 		where: {
 			id: collectionId,
 		},
@@ -55,6 +91,7 @@ async function removeFromCollection(userId: number, gameId: number) {
 
 const collectionRepository = {
 	getUserCollection,
+	getUserCollectionSimplified,
 	checkIfGameIsInCollection,
 	upsertNewCollection,
 	removeFromCollection,

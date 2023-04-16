@@ -27,7 +27,7 @@ async function getGameByIGDBId(gameId: number): Promise<GameIGDB> {
 }
 
 async function searchGamesIGDBAPI(query: string): Promise<SearchedGameIGDB[]> {
-	const body = `fields name, cover.image_id, genres.name, summary; where category = 0 & version_parent = null & cover != null; search "${query}"; limit 100;`;
+	const body = `fields name, cover.image_id, first_release_date, genres.name, summary; where category = 0 & version_parent = null & cover != null; search "${query}"; limit 50;`;
 
 	const result = await request.post(url, body, config);
 

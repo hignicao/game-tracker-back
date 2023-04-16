@@ -857,7 +857,7 @@ async function main() {
 			},
 			{
 				id: 16,
-				name: "Turn-based strategy (TBS)",
+				name: "Turn-based strategy",
 			},
 			{
 				id: 24,
@@ -869,7 +869,7 @@ async function main() {
 			},
 			{
 				id: 25,
-				name: "Hack and slash/Beat 'em up",
+				name: "Hack and slash",
 			},
 			{
 				id: 30,

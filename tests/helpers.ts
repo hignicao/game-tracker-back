@@ -5,20 +5,13 @@ import { createUser } from "./factories";
 import { prisma } from "../src/config/database";
 
 export async function cleanDb() {
-	// await prisma.address.deleteMany({});
-	// await prisma.payment.deleteMany({});
-	// await prisma.ticket.deleteMany({});
-	// await prisma.enrollment.deleteMany({});
-	// await prisma.event.deleteMany({});
-	// await prisma.session.deleteMany({});
-	// await prisma.booking.deleteMany({});
-	// await prisma.ticketType.deleteMany({});
-	// await prisma.room.deleteMany({});
-	// await prisma.hotel.deleteMany({});
-	// await prisma.subscriptions.deleteMany({});
-	// await prisma.user.deleteMany({});
-	// await prisma.activity.deleteMany({})
-  await prisma.users.deleteMany({});
+	await prisma.userCollection.deleteMany({});
+	await prisma.users.deleteMany({});
+	await prisma.gamePlatform.deleteMany({});
+	await prisma.gameGenre.deleteMany({});
+	await prisma.screenshots.deleteMany({});
+	await prisma.games.deleteMany({});
+	await prisma.$disconnect();
 }
 
 export async function generateValidToken(user?: Users) {

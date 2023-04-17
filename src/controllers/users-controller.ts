@@ -26,6 +26,9 @@ export async function getUserProfile(req: Request, res: Response) {
 		const userInfo = await userService.getUserProfileInfo(givenUsername);
 		return res.status(httpStatus.OK).send(userInfo);
 	} catch (error) {
+		if (error.message === "User not found") {
+			return res.status(httpStatus.NOT_FOUND).send(error.message);
+		}
 		return res.status(httpStatus.BAD_REQUEST).send(error);
 	}
 }

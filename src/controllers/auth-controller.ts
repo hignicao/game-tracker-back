@@ -10,7 +10,7 @@ export async function signInPost(req: Request, res: Response) {
 		return res.status(httpStatus.OK).send(loggedUser);
 	} catch (error) {
 		if (error.message === "User not found") {
-			return res.status(httpStatus.NOT_FOUND).send(error.message);
+			return res.status(httpStatus.UNAUTHORIZED).send(error.message);
 		}
 		if (error.message === "Invalid password") {
 			return res.status(httpStatus.UNAUTHORIZED).send(error.message);

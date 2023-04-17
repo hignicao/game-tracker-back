@@ -5,7 +5,7 @@
 	"main": "dist/index.js",
 	"scripts": {
 		"build": "tsc",
-		"start": "npm run prisma:migrate:deploy && node dist/src/server.js",
+		"start": "npm run prisma:migrate:deploy && seed && node dist/src/server.js",
 		"dev": "nodemon src/server.ts",
 		"seed": "npx prisma db seed",
 		"prisma:migrate:dev": "prisma migrate dev",

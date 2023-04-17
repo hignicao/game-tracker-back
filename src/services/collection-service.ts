@@ -13,10 +13,7 @@ async function updateGameCollection(userId: number, gameId: number, statusId: nu
 }
 
 async function deleteGameFromCollection(userId: number, gameId: number) {
-	const gameExists = await gameService.getGameById(gameId);
-	if (!gameExists) {
-		throw new Error("Game not found");
-	}
+	await gameService.getGameById(gameId);
 
 	const collectionExists = await collectionRepository.checkIfGameIsInCollection(userId, gameId);
 	if (collectionExists.length === 0) {

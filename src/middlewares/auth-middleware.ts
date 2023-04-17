@@ -14,7 +14,7 @@ export async function autheticateToken(req: AuthenticatedRequest, res: Response,
 		const { userId } = jwt.verify(token, process.env.SECRET_JWT) as JWTPayload;
 
 		const user = await userRepository.findById(userId);
-		if (!user) return res.status(httpStatus.UNAUTHORIZED).send("Invalid token");
+		if (!user) return res.status(httpStatus.UNAUTHORIZED).send("User not found");
 
 		req.userId = userId;
 		return next();

@@ -43,6 +43,15 @@ describe("GET /collection", () => {
 			expect(response.status).toBe(httpStatus.UNAUTHORIZED);
 			expect(response.text).toBe("Invalid token");
 		});
+
+		it("should return with status 401 if token is from an user that doenst exists anymore", async () => {
+			const user = await createUser();
+			const token = await generateValidToken(user);
+			await prisma.users.deleteMany({});
+			const response = await server.get("/collection").set("Authorization", `Bearer ${token}`);
+			expect(response.status).toBe(httpStatus.UNAUTHORIZED);
+			expect(response.text).toBe("User not found");
+		});
 	});
 
 	describe("when credentials are valid", () => {

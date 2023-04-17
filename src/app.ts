@@ -1,9 +1,9 @@
 import "express-async-errors";
 import express, { json, Request, Response, Express } from "express";
-import cors from "cors";
-import { connectDb, disconnectDB } from "@/config";
-import { authenticationRouter, collectionRouter, gamesRouter, usersRouter } from "@/routers";
+import { connectDb, disconnectDB } from "./config/database";
+import { authenticationRouter, collectionRouter, gamesRouter, usersRouter } from "./routers";
 import dotenv from "dotenv";
+import cors from "cors";
 dotenv.config();
 
 const app = express();

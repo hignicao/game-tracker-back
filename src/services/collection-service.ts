@@ -1,4 +1,4 @@
-import collectionRepository from "@/repositories/collection-repository";
+import collectionRepository from "../repositories/collection-repository";
 import gameService from "./game-service";
 
 async function updateGameCollection(userId: number, gameId: number, statusId: number) {

@@ -1,4 +1,4 @@
-import { prisma } from "config";
+import { prisma } from "../config/database";
 
 async function getUserCollection(userId: number) {
 	const collectionRaw = await prisma.userCollection.findMany({

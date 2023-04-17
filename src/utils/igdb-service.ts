@@ -1,4 +1,4 @@
-import { GameIGDB, SearchedGameIGDB, TrendingGameIGDB } from "@/protocols";
+import { GameIGDB, SearchedGameIGDB, TrendingGameIGDB } from "../protocols";
 import { request } from "./request";
 
 const url = "https://api.igdb.com/v4/games";

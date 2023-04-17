@@ -1,7 +1,7 @@
-import { redisClient } from "@/config";
-import { Game, GameIGDB, SearchedGame, SearchedGameIGDB, TrendingGame, TrendingGameIGDB } from "@/protocols";
-import gameRepository from "@/repositories/game-repository";
-import { getGameByIGDBId, getTrendingGamesIGDBAPI, searchGamesIGDBAPI } from "@/utils/igdb-service";
+import { redisClient } from "../config/database";
+import { Game, GameIGDB, SearchedGame, SearchedGameIGDB, TrendingGame, TrendingGameIGDB } from "../protocols";
+import gameRepository from "../repositories/game-repository";
+import { getGameByIGDBId, getTrendingGamesIGDBAPI, searchGamesIGDBAPI } from "../utils/igdb-service";
 import { fromUnixTime } from "date-fns";
 
 async function getGameById(gameId: number) {

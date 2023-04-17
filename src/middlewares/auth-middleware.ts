@@ -1,4 +1,4 @@
-import userRepository from "@/repositories/users-repository";
+import userRepository from "../repositories/users-repository";
 import { Request, Response, NextFunction } from "express";
 import httpStatus from "http-status";
 import jwt from "jsonwebtoken";

@@ -1,5 +1,5 @@
-import { Game } from "@/protocols";
-import { prisma } from "config";
+import { Game } from "../protocols";
+import { prisma } from "../config/database";
 
 async function create(data: Game) {
 	await prisma.games.create({

@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
-import userRepository from "@/repositories/users-repository";
+import userRepository from "../repositories/users-repository";
 import { Users } from "@prisma/client";
-import collectionRepository from "@/repositories/collection-repository";
+import collectionRepository from "../repositories/collection-repository";
 
 async function createUser({ name, username, email, password }: CreateUserParams): Promise<Users> {
 	await validadeUniqueEmail(email);

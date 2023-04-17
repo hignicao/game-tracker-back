@@ -6,7 +6,7 @@
 	"scripts": {
 		"build": "tsc",
 		"start": "npm run prisma:migrate:deploy && node dist/src/server.js",
-		"dev": "nodemon --watch 'src/' --exec 'ts-node -r tsconfig-paths/register ./src/server.ts' -e ts",
+		"dev": "nodemon src/server.ts",
 		"seed": "npx prisma db seed",
 		"prisma:migrate:dev": "prisma migrate dev",
 		"prisma:migrate:deploy": "prisma migrate deploy"
@@ -47,8 +47,6 @@
 		"nodemon": "^2.0.22",
 		"prisma": "^4.12.0",
 		"ts-node": "^10.9.1",
-		"tsconfig-paths": "^4.2.0",
-		"typescript": "^5.0.3",
-		"typescript-transform-paths": "^3.4.6"
+		"typescript": "^5.0.3"
 	}
 }

@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { Users } from "@prisma/client";
-import userRepository from "@/repositories/users-repository";
+import userRepository from "../repositories/users-repository";
 
 async function signIn(params: SignInParams): Promise<SignInResult> {
 	const { username, password, remember } = params;

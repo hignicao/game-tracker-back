@@ -1,5 +1,5 @@
-import { AuthenticatedRequest } from "@/middlewares/auth-middleware";
-import collectionService from "@/services/collection-service";
+import { AuthenticatedRequest } from "../middlewares/auth-middleware";
+import collectionService from "../services/collection-service";
 import { Response } from "express";
 import httpStatus from "http-status";
 

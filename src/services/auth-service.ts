@@ -6,9 +6,9 @@ import userRepository from "../repositories/users-repository";
 async function signIn(params: SignInParams): Promise<SignInResult> {
 	const { username, password, remember } = params;
 
-	const user = await validadeUserExists(username);
+	const user = await validateUserExists(username);
 
-	await validadePassword(password, user.password);
+	await validatePassword(password, user.password);
 
 	const token = jwt.sign({ userId: user.id }, process.env.SECRET_JWT, {
 		expiresIn: remember ? 86400 : 3600,
@@ -25,7 +25,7 @@ async function signIn(params: SignInParams): Promise<SignInResult> {
 	};
 }
 
-async function validadeUserExists(username: string) {
+async function validateUserExists(username: string) {
 	const user = await userRepository.findByUsername(username);
 	if (!user) {
 		throw new Error("User not found");
@@ -33,7 +33,7 @@ async function validadeUserExists(username: string) {
 	return user;
 }
 
-async function validadePassword(password: string, givenpassword: string) {
+async function validatePassword(password: string, givenpassword: string) {
 	const isValid = await bcrypt.compare(password, givenpassword);
 	if (!isValid) {
 		throw new Error("Invalid password");

@@ -3,8 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
@@ -33,7 +33,7 @@ model Screenshots {
 
 model GameStatus {
   id             Int              @id @default(autoincrement())
-  name           String
+  name           String           @unique
   UserCollection UserCollection[]
 }
 
@@ -52,13 +52,13 @@ model Games {
 
 model Genres {
   id        Int         @id @default(autoincrement())
-  name      String
+  name      String      @unique
   GameGenre GameGenre[]
 }
 
 model Platforms {
   id           Int            @id @default(autoincrement())
-  name         String
+  name         String         @unique
   GamePlatform GamePlatform[]
 }
 

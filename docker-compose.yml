@@ -1,0 +1,47 @@
+services:
+  postgres:
+    image: postgres
+    container_name: postgres
+    networks:
+      - gametracker-network
+    ports:
+      - 5433:5432
+    env_file:
+      - .env
+    volumes:
+      - postgres-volume:/var/lib/postgresql/data
+
+  redis:
+    image: redis
+    container_name: redis
+    networks:
+      - gametracker-network
+    ports:
+      - 6378:6379
+    env_file:
+      - .env
+    volumes:
+      - redis_data:/data
+
+  node:
+    container_name: node
+    build: .
+    image: gametracker/back
+    networks:
+      - gametracker-network
+    ports:
+      - 5000:5000
+    depends_on:
+      - postgres
+      - redis
+    env_file:
+      - .env
+
+networks:
+  gametracker-network:
+    name: gametracker-network
+    driver: bridge
+
+volumes:
+  postgres-volume:
+  redis_data:

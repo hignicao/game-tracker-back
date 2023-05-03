@@ -1,0 +1,29 @@
+services:
+  postgres:
+    image: postgres
+    container_name: postgres
+    ports:
+      - 5433:5432
+    env_file:
+      - .env.test
+
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - 6378:6379
+    env_file:
+      - .env.test
+
+  node:
+    container_name: node
+    build: .
+    image: gametracker/back
+    ports:
+      - 5000:5000
+    depends_on:
+      - postgres
+      - redis
+    env_file:
+      - .env.test
+    command: sh -c "dockerize -wait tcp://postgres:5432 -timeout 20s docker-entrypoint.sh && npm run start"

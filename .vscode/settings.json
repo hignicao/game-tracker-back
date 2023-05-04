@@ -1,0 +1,5 @@
+{
+  "yaml.schemas": {
+    "https://json.schemastore.org/github-workflow.json": "file:///home/hugoignacio/Desktop/Driven/Projeto%20Autoral/game-tracker-back/.github/workflows/deploy.yml"
+  }
+}

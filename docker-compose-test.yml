@@ -2,6 +2,7 @@ services:
   postgres:
     image: postgres
     container_name: postgres
+    restart: always
     ports:
       - 5433:5432
     env_file:
@@ -26,4 +27,3 @@ services:
       - redis
     env_file:
       - .env.test
-    command: sh -c "dockerize -wait tcp://postgres:5432 -timeout 20s docker-entrypoint.sh && npm run start"

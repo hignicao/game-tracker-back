@@ -21,4 +21,4 @@ jobs:
           envkey_IGDB_CLIENT_ID: "8yw1hh1n1pjcjliavof3h2milfmwkw"
           file_name: .env.test
       - name: Run tests
-        run: docker-compose -f docker-compose-test.yml run node npm run test:start
+        run: docker-compose -f docker-compose-test.yml

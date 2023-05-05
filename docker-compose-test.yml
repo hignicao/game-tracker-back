@@ -27,4 +27,4 @@ services:
       - redis
     env_file:
       - .env.test
-    command: sh -c "dockerize -wait tcp://postgres:5432 -timeout 20s docker-entrypoint.sh && npm run test:start"
+    command: sh -c "dockerize -wait tcp://postgres:5432 -timeout 20s docker-entrypoint.sh && npm run start"

@@ -2,6 +2,8 @@
 
 Este é o repositório do back-end do projeto Game Tracker. O Game Tracker é uma aplicação desenvolvida em Node.js, TypeScript, Prisma, Postgres e Redis. O objetivo do projeto é ajudar os usuários a gerenciar os jogos que eles pretendem jogar ou já jogaram.
 
+Link para o repositório front-end: https://github.com/hignicao/game-tracker-front
+
 ## Configuração
 
 Antes de executar o back-end, certifique-se de ter as seguintes dependências instaladas:

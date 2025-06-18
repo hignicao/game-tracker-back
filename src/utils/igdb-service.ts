@@ -11,7 +11,7 @@ const config = {
 
 async function getTrendingGamesIGDBAPI(): Promise<TrendingGameIGDB[]> {
 	const body =
-		"fields name, cover.image_id, aggregated_rating; sort follows desc; where total_rating > 0 & rating > 0 & aggregated_rating > 0 & category = 0 & follows > 0 & first_release_date > 1262304000; limit 500;";
+		"fields name, cover.image_id, aggregated_rating; where parent_game = null & aggregated_rating != null & total_rating_count > 100; sort total_rating_count desc; limit 100;";
 
 	const result = await request.post(url, body, config);
 
@@ -27,7 +27,7 @@ async function getGameByIGDBId(gameId: number): Promise<GameIGDB> {
 }
 
 async function searchGamesIGDBAPI(query: string): Promise<SearchedGameIGDB[]> {
-	const body = `fields name, cover.image_id, first_release_date, genres.name, summary; where category = 0 & version_parent = null & cover != null; search "${query}"; limit 50;`;
+	const body = `fields name, cover.image_id, first_release_date, genres.name, summary; where parent_game = null & version_parent = null & cover != null; search "${query}"; limit 50;`;
 
 	const result = await request.post(url, body, config);
 
